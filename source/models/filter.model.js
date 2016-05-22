@@ -1,25 +1,17 @@
 'use strict';
 
-//const m = require('mithril');
+const m = require('mithril');
 
-const filter = {};
-
-filter.Filter = function (data){
+let Filter = function (data){
     this.name = m.prop(data.name);
     this.enabled = m.prop(false);
 };
 
-filter.FilterList = function (){
-    let _filterList = new Array();
-    this.push = item => _filterList.push(item);
-    this.map = lambda => _filterList.map(lambda);
-};
-
-filter.vm = (function(){
+module.exports = (function(){
     let vm = {};
     vm.init = function(){
-        vm.list = new filter.FilterList();
-        vm.add = filter => vm.list.push(filter);
+        vm.list = new Array();
+        vm.add = data => vm.list.push(new Filter(data));
     };
     return vm;
 })();
