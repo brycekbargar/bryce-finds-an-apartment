@@ -4,7 +4,7 @@
   "description": "a small google maps app to help me figure out where to live",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha || eslint source test"
+    "test": "istanbul cover _mocha; eslint ./"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,6 @@
     "mocha": "^2.4.5",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
-  }
+  },
+  "dependencies": {}
 }
