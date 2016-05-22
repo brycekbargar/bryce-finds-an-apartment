@@ -1,0 +1,27 @@
+{
+  "name": "bryce-finds-an-apartment",
+  "version": "0.0.1",
+  "description": "a small google maps app to help me figure out where to live",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha || eslint source test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brycekbargar/bryce-finds-an-apartment.git"
+  },
+  "author": "bryce",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brycekbargar/bryce-finds-an-apartment/issues"
+  },
+  "homepage": "https://github.com/brycekbargar/bryce-finds-an-apartment#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.10.2",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  }
+}
