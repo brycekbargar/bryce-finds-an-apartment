@@ -1,11 +1,12 @@
 'use strict';
 
-//const m = require('mithril');
+const m = require('mithril');
+const vm = require('./../models/filter.model.js');
 
-filter.view = () =>
+module.exports = () =>
     m('html', [
         m('div', {style: {display: 'flex', 'flex-direction': 'column'}}, [
-            filter.vm.list.map(
+            vm.list.map(
                 (f,i) => 
                     m('span', [
                         m('input[type=checkbox]', {
