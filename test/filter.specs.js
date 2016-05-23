@@ -2,8 +2,8 @@
 
 const expect = require('chai').expect;
 
-const vm = require('../source/models/filter.model.js');
-const Controller = require('../source/controllers/filter.controller.js');
+const vm = require('../source/components/filter/filter.model.js');
+const Controller = require('../source/components/filter/filter.controller.js');
 
 describe('For the model', () => {
     beforeEach('setup the model', () => {

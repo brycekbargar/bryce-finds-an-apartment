@@ -1,7 +1,7 @@
 'use strict';
 
 const m = require('mithril');
-const vm = require('./../models/filter.model.js');
+const vm = require('./filter.model.js');
 
 module.exports = () =>
     m('html', [

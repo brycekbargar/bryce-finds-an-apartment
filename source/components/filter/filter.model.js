@@ -1,11 +1,6 @@
 'use strict';
 
-const m = require('mithril');
-
-let Filter = function (data){
-    this.name = m.prop(data.name);
-    this.enabled = m.prop(false);
-};
+const Filter = require('./../../models/filter.js');
 
 module.exports = (function(){
     let vm = {};
