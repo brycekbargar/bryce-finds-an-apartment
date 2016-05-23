@@ -1,20 +1,28 @@
 'use strict';
 
 const m = require('mithril');
-const vm = require('./filter.model.js');
 
-module.exports = () =>
-    m('html', [
-        m('div', {style: {display: 'flex', 'flex-direction': 'column'}}, [
-            vm.list.map(
-                (f,i) => 
-                    m('span', [
-                        m('input[type=checkbox]', {
-                            id: 'filter' + i,
-                            onclick: m.withAttr('checked', f.enabled), 
-                            checked: f.enabled()
-                        }), 
-                        m('label', {for: 'filter' + i}, f.name())
-                    ]))
-        ])
+let filter = function(_, args){
+    let filter = args[0];
+    let index = args[1];
+
+    return m('span', [
+        m('input[type=checkbox]', {
+            id: 'filter' + index,
+            onclick: m.withAttr('checked', filter.enabled), 
+            checked: filter.enabled()
+        }), 
+        m('label', {for: 'filter' + index}, filter.name())
     ]);
+};
+
+let flexStyle = {style: {'display': 'flex', 'flex-direction': 'column'}}; 
+let filterBox = (controller) =>
+    m('div', flexStyle, [
+        controller.filters().map(() => m(require('./filter.js').Filter, arguments))
+    ]);
+
+module.exports = {
+    filterView: filter,
+    filterBoxView: filterBox
+};

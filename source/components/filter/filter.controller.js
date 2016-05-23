@@ -1,7 +1,11 @@
 'use strict';
 
-const vm = require('./filter.model.js');
+const m = require('mithril');
+const Filter = require('./../../models/filter.js');
 
 module.exports = function() {
-    vm.init();
+    this.filters = m.prop([
+        new Filter('First Filter'),
+        new Filter('Second Filter')
+    ]);
 };
