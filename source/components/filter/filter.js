@@ -1,11 +1,11 @@
 'use strict';
 
-const filterBoxController = require('./filter.controller.js');
+const FilterBoxController = require('./filter.controller.js');
 const views = require('./filter.view.js');
 
 module.exports = {
     FilterBox: {
-        controller: filterBoxController,
+        controller: FilterBoxController,
         view: views.filterBoxView
     },
     Filter: {
