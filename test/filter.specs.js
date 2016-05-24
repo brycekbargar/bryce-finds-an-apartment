@@ -35,6 +35,10 @@ describe('For the views', () => {
             let element = this.document.getElementById('filter1');
             expect(element).to.not.be.null;
         });
+        it('have a label', () => {
+            let element = this.document.getElementsByTagName('label')[0];
+            expect(element.textContent).to.equal('Test Filter');
+        });
         it('be disabled by default', () => {
             let element = this.document.getElementById('filter1');
             expect(element.checked).to.be.false;
@@ -57,9 +61,9 @@ describe('For the views', () => {
         beforeEach('setup filter', () => this.filter = new Filter({name: 'Test Filter'}));
         beforeEach('render view', () => {
             let filters = [
-                new Filter('First'),
-                new Filter('Second'),
-                new Filter('Third')
+                new Filter({name: 'First'}),
+                new Filter({name: 'Second'}),
+                new Filter({name: 'Third'})
             ];
             m.mount(this.document.body, {
                 controller: function(){ return {filters: () => filters}; },

@@ -7,12 +7,11 @@ let filter = function(_, args){
     let index = args[1];
 
     return m('span', [
-        m('input[type=checkbox]', {
-            id: 'filter' + index,
+        m(`input#${'filter' + index}[type=checkbox]`, {
             onclick: m.withAttr('checked', filter.enabled), 
             checked: filter.enabled()
         }), 
-        m('label', {for: 'filter' + index}, filter.name())
+        m(`label[for=${'filter' + index}]`, filter.name())
     ]);
 };
 
