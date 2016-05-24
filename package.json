@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/brycekbargar/bryce-finds-an-apartment#readme",
   "devDependencies": {
+    "browserify": "^13.0.1",
     "chai": "^3.5.0",
     "eslint": "^2.10.2",
     "istanbul": "^0.4.3",
