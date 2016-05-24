@@ -11,7 +11,6 @@ const views = require('../source/components/filter/filter.view.js');
 describe('For the controller', () => {
     it('expect it to have two testing filters', () => {
         let controller = new Controller();
-
         expect(controller.filters()).to.be.have.length(2);
     });
 });
@@ -28,11 +27,9 @@ describe('For the views', () => {
     describe('expect FilterView to', () => {
         beforeEach('setup filter', () => this.filter = new Filter({name: 'Test Filter'}));
         beforeEach('render view', () => {
-            m.mount(
-                this.document.body, 
-                {
-                    view: () => views.filterView(null, [this.filter, 1])
-                });
+            m.mount(this.document.body, {
+                view: () => views.filterView(null, [this.filter, 1])
+            });
         });
         it('have an id', () => {
             let element = this.document.getElementById('filter1');
@@ -54,6 +51,24 @@ describe('For the views', () => {
             m.redraw(true);
             let element = this.document.getElementById('filter1');
             expect(element.checked).to.be.true;
+        });
+    });
+    describe('expect the FilterBoxView to', () => {
+        beforeEach('setup filter', () => this.filter = new Filter({name: 'Test Filter'}));
+        beforeEach('render view', () => {
+            let filters = [
+                new Filter('First'),
+                new Filter('Second'),
+                new Filter('Third')
+            ];
+            m.mount(this.document.body, {
+                controller: function(){ return {filters: () => filters}; },
+                view: views.filterBoxView
+            });
+        });
+        it('render many filters', () => {
+            let filters = this.document.getElementsByTagName('span'); 
+            expect(filters).to.have.length(3);
         });
     });
 });
