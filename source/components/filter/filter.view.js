@@ -17,10 +17,12 @@ let filter = function(_, args){
 };
 
 let flexStyle = {style: {'display': 'flex', 'flex-direction': 'column'}}; 
-let filterBox = (controller) =>
+let filterBox = (controller) => {
+    let filterComponent = require('./filter.js').Filter;
     m('div', flexStyle, [
-        controller.filters().map(() => m(require('./filter.js').Filter, arguments))
+        controller.filters().map(() => m(filterComponent, arguments))
     ]);
+};
 
 module.exports = {
     filterView: filter,
