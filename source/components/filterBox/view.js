@@ -1,7 +1,7 @@
 'use strict';
 
 const m = require('mithril');
-const FilterComponent = require('./../filter/filter.js');
+const FilterComponent = require('./../filter/component.js');
 
 let flexStyle = {style: {'display': 'flex', 'flex-direction': 'column'}}; 
 module.exports = (controller) => {

@@ -2,4 +2,4 @@
 
 const m = require('mithril');
 
-m.mount(document.body, require('./components/filterBox/filterBox.js'));
+m.mount(document.body, require('./components/filterBox/component.js'));

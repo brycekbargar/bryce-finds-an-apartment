@@ -5,7 +5,7 @@ const jsdomify = require('jsdomify').default;
 
 const m = require('mithril');
 const Filter = require('../source/models/filter.js');
-const FilterView = require('../source/components/filter/filter.view.js');
+const FilterView = require('../source/components/filter/view.js');
 
 describe('For the FilterView expect it to', () => {
     before('create the dom', () => jsdomify.create('<html><body></body></html>'));

@@ -5,8 +5,8 @@ const jsdomify = require('jsdomify').default;
 
 const m = require('mithril');
 const Filter = require('../source/models/filter.js');
-const FilterBoxController = require('../source/components/filterBox/filterBox.controller.js');
-const FilterBoxView = require('../source/components/filterBox/filterBox.view.js');
+const FilterBoxController = require('../source/components/filterBox/controller.js');
+const FilterBoxView = require('../source/components/filterBox/view.js');
 
 describe('For the controller', () => {
     it('expect it to have two testing filters', () => {
@@ -32,7 +32,7 @@ describe('For the FilterBoxView expect it to', () => {
         ];
         m.mount(this.document.body, {
             controller: function(){ return {filters: () => filters}; },
-            view: FilterBoxView
+            view: FilterBoxView 
         });
     });
 
