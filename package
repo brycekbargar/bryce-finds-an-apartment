@@ -1,5 +1,12 @@
 #!/bin/zsh
 
+mkdir -p ./build
 ./node_modules/.bin/browserify src/app.js -o build/app.js
 /bin/cp src/index.html build/
 /bin/cp src/**/*.css build/
+
+mkdir -p ./dist
+/bin/cp ./build/index.html ./dist/
+/bin/cp ./build/app.js ./dist/
+cat ./build/*.css > ./dist/app.css
+
