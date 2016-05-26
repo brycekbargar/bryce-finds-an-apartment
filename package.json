@@ -4,7 +4,8 @@
   "description": "a small google maps app to help me figure out where to live",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./",
+    "lintWitErrors": "eslint ./",
+    "lint": "eslint ./ || true",
     "test": "istanbul cover _mocha; npm run lint",
     "clean": "rm -fdr ./build ./dist",
     "build": "mkdir -p build && ./package",
@@ -26,7 +27,10 @@
     "eslint": "^2.10.2",
     "istanbul": "^0.4.3",
     "jsdomify": "^2.1.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "proxyquire": "^1.7.9",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "google-maps": "^3.2.1",
