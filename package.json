@@ -4,7 +4,8 @@
   "description": "a small google maps app to help me figure out where to live",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha; eslint ./",
+    "lint": "eslint ./",
+    "test": "istanbul cover _mocha; npm run lint",
     "clean": "rm -r ./build",
     "build": "mkdir -p build && browserify source/app.js -o build/app.js && /bin/cp source/index.html build/",
     "rebuild": "npm run clean && npm run build"
