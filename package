@@ -1,5 +1,5 @@
 #!/bin/zsh
 
-./node_modules/.bin/browserify source/app.js -o build/app.js
-/bin/cp source/index.html build/
-/bin/cp source/**/*.css build/
+./node_modules/.bin/browserify src/app.js -o build/app.js
+/bin/cp src/index.html build/
+/bin/cp src/**/*.css build/

@@ -4,8 +4,8 @@ const expect = require('chai').expect;
 const jsdomify = require('jsdomify').default;
 
 const m = require('mithril');
-const Filter = require('../source/models/filter.js');
-const View = require('../source/components/filter/view.js');
+const Filter = require('../src/models/filter.js');
+const View = require('../src/components/filter/view.js');
 
 describe('For the FilterComponent', () => {
 
