@@ -5,17 +5,9 @@ const jsdomify = require('jsdomify').default;
 
 const m = require('mithril');
 const Filter = require('../src/models/filter.js');
-const Controller = require('../src/components/filterBox/controller.js');
 const View = require('../src/components/filterBox/view.js');
 
 describe('For the FilterBoxComponent', () => {
-
-    describe('expect the Controller to', () => {
-        it('have two testing filters', () => {
-            let controller = new Controller();
-            expect(controller.filters()).to.be.have.length(2);
-        });
-    });
     
     describe('expect the View to', () => {
         before('create the dom', () => jsdomify.create('<html><body></body></html>'));
@@ -33,8 +25,7 @@ describe('For the FilterBoxComponent', () => {
                 new Filter({name: 'Third'})
             ];
             m.mount(this.document.body, {
-                controller: function(){ return {filters: () => filters}; },
-                view: View 
+                view: () => View(null, {filters: () => filters})
             });
         });
         it('render many filters', () => {

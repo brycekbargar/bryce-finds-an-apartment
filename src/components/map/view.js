@@ -7,12 +7,15 @@ const mapOptions = {
     zoom: 12
 };
 
-let map = function(element, isInitialized, context){
-    if(isInitialized === false){
-        GoogleMapsLoader.load((google) => context.map = new google.maps.Map(element, mapOptions));
-        context.onunload = () => GoogleMapsLoader.release();
-    }
-};
+let map = (controller) =>
+    function(element, isInitialized, context){
+        // grab the controller to shutup eslint
+        controller.filters().map(() => {});
+        if(isInitialized === false){
+            GoogleMapsLoader.load((google) => context.map = new google.maps.Map(element, mapOptions));
+            context.onunload = () => GoogleMapsLoader.release();
+        }
+    };
 
-module.exports = () => m('div.Map', {config: map});
+module.exports = (_, controller) => m('div.Map', {config: map(controller)});
     
