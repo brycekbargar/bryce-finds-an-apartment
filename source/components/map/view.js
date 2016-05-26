@@ -14,5 +14,5 @@ let map = function(element, isInitialized, context){
     }
 };
 
-module.exports = () => m('div#map', {style: {height: '100vh', width: '100%'}, config: map});
+module.exports = () => m('div.Map', {config: map});
     

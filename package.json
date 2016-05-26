@@ -7,7 +7,7 @@
     "lint": "eslint ./",
     "test": "istanbul cover _mocha; npm run lint",
     "clean": "rm -r ./build",
-    "build": "mkdir -p build && browserify source/app.js -o build/app.js && /bin/cp source/index.html build/",
+    "build": "mkdir -p build && ./package",
     "rebuild": "npm run clean && npm run build"
   },
   "repository": {

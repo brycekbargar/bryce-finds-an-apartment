@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+./node_modules/.bin/browserify source/app.js -o build/app.js
+/bin/cp source/index.html build/
+/bin/cp source/**/*.css build/

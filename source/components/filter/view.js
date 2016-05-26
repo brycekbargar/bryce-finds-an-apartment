@@ -6,7 +6,7 @@ module.exports = function(_, args){
     let filter = args[0];
     let index = args[1];
 
-    return m('span', [
+    return m('span.Filter', [
         m(`input#${'filter' + index}[type=checkbox]`, {
             onclick: m.withAttr('checked', filter.enabled), 
             checked: filter.enabled()
