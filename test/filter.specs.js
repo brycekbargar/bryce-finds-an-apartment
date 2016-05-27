@@ -3,26 +3,31 @@
 const expect = require('chai').expect;
 const jsdomify = require('jsdomify').default;
 
-const m = require('mithril');
-const Filter = require('../src/models/filter.js');
-const View = require('../src/components/filter/view.js');
-
 describe('For the FilterComponent', () => {
 
     describe('expect the View to', () => {
         before('create the dom', () => jsdomify.create('<html><body></body></html>'));
         after('destroy the dom', () => jsdomify.destroy());
+
+        beforeEach('re-require mithril', () => {
+            delete require.cache[require.resolve('mithril')];
+            this.m = require('mithril');
+        });
+        beforeEach('setup filter', () => {
+            let Filter = require('../src/models/filter.js');
+            this.filter = new Filter({name: 'Test Filter'});
+        });
         beforeEach('jsdom setup', () => {
             jsdomify.clear();
             this.document = jsdomify.getDocument();
-            m.deps(this.document.defaultView);
+            this.m.deps(this.document.defaultView);
         });
-        beforeEach('setup filter', () => this.filter = new Filter({name: 'Test Filter'}));
         beforeEach('render view', () => {
-            m.mount(this.document.body, {
-                view: () => View(null, [this.filter, 1])
+            this.m.mount(this.document.body, {
+                view: () => require('../src/components/filter/view.js')(null, [this.filter, 1])
             });
         });
+
         it('have an id', () => {
             let element = this.document.getElementById('filter1');
             expect(element).to.not.be.null;
@@ -44,7 +49,7 @@ describe('For the FilterComponent', () => {
         });
         it('be bound to the model', () => {
             this.filter.enabled(true);
-            m.redraw(true);
+            this.m.redraw(true);
             let element = this.document.getElementById('filter1');
             expect(element.checked).to.be.true;
         });
