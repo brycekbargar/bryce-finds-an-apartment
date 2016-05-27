@@ -7,6 +7,6 @@ mkdir -p ./build
 
 mkdir -p ./dist
 /bin/cp ./build/index.html ./dist/
-/bin/cp ./build/app.js ./dist/
+sed -e "s/GOOGLE_MAPS_LOADER_KEY/$GOOGLE_MAPS_LOADER_KEY/" ./build/app.js > ./dist/app.js
 cat ./build/*.css > ./dist/app.css
 
