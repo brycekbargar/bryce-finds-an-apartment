@@ -1,3 +1,5 @@
+'use strict';
+
 const GoogleMapsLoader = require('google-maps');
 
 GoogleMapsLoader.LIBRARIES = ['drawing', 'geometry', 'places'];
@@ -7,12 +9,18 @@ const mapOptions = {
     zoom: 12
 };
 
-module.exports = (controller) =>
-    function(element, isInitialized, context){
-        // grab the controller to shutup eslint
-        controller.filters().map(() => {});
-        if(isInitialized === false){
-            GoogleMapsLoader.load((google) => context.map = new google.maps.Map(element, mapOptions));
-            context.onunload = () => GoogleMapsLoader.release();
+module.exports = (controller) => 
+    (element, isInitialized, context) => {
+        if(isInitialized){
+            context.vm.redraw(context.map);
         }
+        else {
+            context.vm = controller.vm;
+            GoogleMapsLoader.load((google) => {
+                context.map = new google.maps.Map(element, mapOptions);
+                context.vm.init(google.maps.Marker, new google.maps.places.PlacesService(context.map));
+                context.vm.redraw(context.map);
+            });
+            context.onunload = () => GoogleMapsLoader.release();
+        } 
     };

@@ -1,3 +1,4 @@
 module.exports = {
-    view: require('./view.js') 
+    controller: require('./controller.js'),
+    view: require('./view.js')
 };

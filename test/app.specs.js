@@ -5,7 +5,7 @@ const expect = require('chai')
     .expect;
 const jsdomify = require('jsdomify').default;
 const stub = require('sinon').stub;
-const proxyquire = require('proxyquire');
+const proxyquire = require('proxyquire').noCallThru();
 
 describe('For the App', () => {
 
@@ -38,7 +38,7 @@ describe('For the App', () => {
         });
         beforeEach('render view', () => {
             let view = 
-                proxyquire('../src/components/app/view.js', {
+                proxyquire('./../src/components/app/view.js', {
                     './../filterBox/component.js': {view: this.filterBoxStub},
                     './../map/component.js': {view: this.mapStub},
                     'mithril': this.m
