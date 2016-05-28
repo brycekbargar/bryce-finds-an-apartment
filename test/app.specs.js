@@ -5,14 +5,20 @@ const expect = require('chai')
     .expect;
 const jsdomify = require('jsdomify').default;
 const stub = require('sinon').stub;
+const spy = require('sinon').spy;
 const proxyquire = require('proxyquire').noCallThru();
 
 describe('For the App', () => {
 
     describe('expect the Controller to', () => {
-        it('have two testing filters', () => {
-            let Controller = require('../src/components/app/controller.js');
-            expect(new Controller().filters()).to.be.have.length(2);
+        it('instantiate the view model', () => {
+            let viewmodelSpy = spy();
+            let Controller = 
+                proxyquire('../src/components/app/controller.js', {
+                    './viewmodel.js': viewmodelSpy
+                });
+            new Controller();
+            expect(viewmodelSpy).to.have.been.calledWithNew;
         });
     });
 
