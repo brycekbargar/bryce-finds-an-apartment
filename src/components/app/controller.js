@@ -1,5 +1,5 @@
 const m = require('mithril');
-const Filter = require('./models/filter.js');
+const Filter = require('./../../models/filter.js');
 
 module.exports = function() {
     this.filters = m.prop([

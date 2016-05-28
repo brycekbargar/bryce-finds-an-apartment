@@ -2,9 +2,3 @@
 .u-flexbox { display: flex; }
 .u-flexbox--vertical { flex-direction: column; }
 
-/* App */
-.App {
-    width: 100vw;
-    height: 100vh;
-}
-

@@ -11,7 +11,7 @@ describe('For the App', () => {
 
     describe('expect the Controller to', () => {
         it('have two testing filters', () => {
-            let Controller = require('../src/controller.js');
+            let Controller = require('../src/components/app/controller.js');
             expect(new Controller().filters()).to.be.have.length(2);
         });
     });
@@ -38,9 +38,9 @@ describe('For the App', () => {
         });
         beforeEach('render view', () => {
             let view = 
-                proxyquire('../src/view.js', {
-                    './components/filterBox/component.js': {view: this.filterBoxStub},
-                    './components/map/component.js': {view: this.mapStub},
+                proxyquire('../src/components/app/view.js', {
+                    './../filterBox/component.js': {view: this.filterBoxStub},
+                    './../map/component.js': {view: this.mapStub},
                     'mithril': this.m
                 });
 
