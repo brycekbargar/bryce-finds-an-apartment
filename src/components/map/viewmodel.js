@@ -30,7 +30,7 @@ const MapFilter = function(filter){
     this.init = (Marker, places) => 
         places.radarSearch({
             location: {lat: 41.881832, lng: -87.623177},
-            radius: filter.radius(),
+            radius: 16000,
             type: filter.placeType(),
             name: filter.placeName()
         },
