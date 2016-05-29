@@ -83,21 +83,3 @@ const MapAddress = function(address) {
         });
     };
 };
-
-
-module.exports = function(address, filters){
-    let vm = {
-        filters: filters().map((f) => new MapFilter(f)),
-        address: new MapAddress(address)
-    };
-
-    this.init = (places, geocoder, newCircle, newMarker) => {
-        vm.address.init(geocoder, newMarker);
-        return Promise.map(vm.filters, (f) => f.init(places, newCircle), {concurrency: 5});
-    };
-
-    this.redraw = () => {
-        vm.filters.map((f) => f.redraw());
-        return vm.address.redraw();
-    };
-};

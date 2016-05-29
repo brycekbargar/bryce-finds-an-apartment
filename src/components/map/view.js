@@ -1,5 +1,5 @@
 const m = require('mithril');
 
-module.exports = (controller) => m('div.Map', {config: require('./map.js')(controller)});
+module.exports = (_, vm) => m('div.Map', {config: require('./map.js')(vm)});
 
     
