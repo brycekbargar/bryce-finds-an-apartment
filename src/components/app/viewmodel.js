@@ -7,6 +7,7 @@ const Address = require('./../../models/address.js');
 const groceryColor = '#a431fc';
 
 module.exports = function(){
+    this.address = m.prop(new Address());
     this.filters =  m.prop([
         new Filter({
             name: 'Red Line Stations',
@@ -86,5 +87,10 @@ module.exports = function(){
             color: groceryColor
         })
     ]);
-    this.address = m.prop(new Address());
+    this.map = m.prop();
+    this.maps = m.prop();
+    this.services = {
+        places: m.prop(),
+        geocoder: m.prop()
+    };
 };
