@@ -1,5 +1,7 @@
 'use strict';
 
+const Promise = require('bluebird');
+
 const MapFilter = function(filter){
     let markers = [];
     let isShown = false;
@@ -28,21 +30,29 @@ const MapFilter = function(filter){
     };
 
     this.init = (Marker, places) => 
-        places.radarSearch({
-            location: {lat: 41.881832, lng: -87.623177},
-            radius: 16000,
-            type: filter.placeType(),
-            name: filter.placeName()
-        },
-        (radarResults) => 
-            radarResults.map(
-                (r) => markers.push(new Marker({position: r.geometry.location}))));
+        new Promise((resolve, reject) => {
+            places.radarSearch({
+                location: {lat: 41.881832, lng: -87.623177},
+                radius: 16000,
+                type: filter.placeType(),
+                name: filter.placeName()
+            },
+            (radarResults, status) => {
+                if(status === 'OK') {
+                    radarResults.map((r) => markers.push(new Marker({position: r.geometry.location})));
+                    resolve();
+                }
+                else {
+                    reject(status);
+                }
+            });
+        });
 
 };
 
 module.exports = function(filters){
     let vms = filters.map((f) => new MapFilter(f));
 
-    this.init = (Marker, places) => vms.map((f) => f.init(Marker, places));
+    this.init = (Marker, places) => Promise.map(vms, (f) => f.init(Marker, places));
     this.redraw = (map) => vms.map((f) => f.redraw(map));
 };

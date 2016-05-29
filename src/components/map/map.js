@@ -1,5 +1,6 @@
 'use strict';
 
+const m = require('mithril');
 const GoogleMapsLoader = require('google-maps');
 
 GoogleMapsLoader.LIBRARIES = ['drawing', 'geometry', 'places'];
@@ -16,10 +17,13 @@ module.exports = (controller) =>
         }
         else {
             context.vm = controller.vm;
+            m.startComputation();
             GoogleMapsLoader.load((google) => {
                 context.map = new google.maps.Map(element, mapOptions);
-                context.vm.init(google.maps.Marker, new google.maps.places.PlacesService(context.map));
-                context.vm.redraw(context.map);
+                context.vm.init(
+                    google.maps.Marker, 
+                    new google.maps.places.PlacesService(context.map)
+                ).finally(() => m.endComputation());
             });
             context.onunload = () => GoogleMapsLoader.release();
         } 
