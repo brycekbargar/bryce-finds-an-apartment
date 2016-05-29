@@ -54,9 +54,50 @@ const MapFilter = function(filter){
                 }))));
 };
 
-module.exports = function(address, filters){
-    let vms = filters.map((f) => new MapFilter(f));
+const MapAddress = function(address) {
+    let marker = null;
+    let geocoder = null; 
 
-    this.init = (places, newCircle) => Promise.map(vms, (f) => f.init(places, newCircle), {concurrency: 5});
-    this.redraw = () => vms.map((f) => f.redraw());
+    this.init = (g, newMarker) => {
+        geocoder = g;
+        marker = newMarker({
+            icon: {
+                url: 'http://maps.gstatic.com/mapfiles/circle.png'
+            }
+        });
+    };
+    
+    this.redraw = () => {
+        if(!marker || !geocoder || address().value() === '') { return; }
+        geocoder.geocode({
+            address: `${address().value()}, Chicago IL`
+        }, (geocoderResults, status) => {
+            if(status === 'OK') {
+                if(geocoderResults[0]){
+                    marker.setPosition(geocoderResults[0].geometry.location);
+                }
+            }
+            else {
+                throw new Error(status);
+            }
+        });
+    };
+};
+
+
+module.exports = function(address, filters){
+    let vm = {
+        filters: filters().map((f) => new MapFilter(f)),
+        address: new MapAddress(address)
+    };
+
+    this.init = (places, geocoder, newCircle, newMarker) => {
+        vm.address.init(geocoder, newMarker);
+        return Promise.map(vm.filters, (f) => f.init(places, newCircle), {concurrency: 5});
+    };
+
+    this.redraw = () => {
+        vm.filters.map((f) => f.redraw());
+        return vm.address.redraw();
+    };
 };

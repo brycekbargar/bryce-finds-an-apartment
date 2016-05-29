@@ -3,5 +3,5 @@
 const Viewmodel = require('./viewmodel.js');
 
 module.exports = function(vm){
-    this.vm = new Viewmodel(vm.address(), vm.filters());
+    this.vm = new Viewmodel(vm.address, vm.filters);
 };

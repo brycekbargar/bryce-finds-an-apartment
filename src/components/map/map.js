@@ -23,7 +23,9 @@ module.exports = (controller) =>
                 context.vm
                     .init(
                         new google.maps.places.PlacesService(map),
-                        (cOpts) => new google.maps.Circle(Object.assign(cOpts, {map: map})))
+                        new google.maps.Geocoder(),
+                        (cOpts) => new google.maps.Circle(Object.assign(cOpts, {map: map})),
+                        (mOpts) => new google.maps.Marker(Object.assign(mOpts, {map: map})))
                     .finally(() => m.endComputation());
             });
             context.onunload = () => GoogleMapsLoader.release();
