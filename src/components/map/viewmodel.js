@@ -5,27 +5,16 @@ const Promise = require('bluebird');
 const MapFilter = function(filter){
     let circles = [];
 
-    let redraw = () => {
-        if(circles) {
+    this.redraw = () => {
+        if(!circles) { return; }
+        if(filter.enabled()){
             circles.map((c) => {
-                c.setRadius(filter.radius());
+                c.setRadius(parseInt(filter.radius()));
                 c.setVisible(true);
             });
         }
-    };
-
-    let remove = () => {
-        if(circles){
-            circles.map((c) => c.setVisible(false));
-        }
-    };
-
-    this.redraw = () => {
-        if(filter.enabled()){
-            redraw();
-        }
         else{
-            remove();
+            circles.map((c) => c.setVisible(false));
         }
     };
 
