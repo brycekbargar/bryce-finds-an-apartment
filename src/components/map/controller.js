@@ -2,6 +2,6 @@
 
 const Viewmodel = require('./viewmodel.js');
 
-module.exports = function(controller){
-    this.vm = new Viewmodel(controller.filters());
+module.exports = function(vm){
+    this.vm = new Viewmodel(vm.address(), vm.filters());
 };

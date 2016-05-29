@@ -54,7 +54,7 @@ const MapFilter = function(filter){
                 }))));
 };
 
-module.exports = function(filters){
+module.exports = function(address, filters){
     let vms = filters.map((f) => new MapFilter(f));
 
     this.init = (places, newCircle) => Promise.map(vms, (f) => f.init(places, newCircle), {concurrency: 5});

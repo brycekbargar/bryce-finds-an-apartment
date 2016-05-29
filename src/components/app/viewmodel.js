@@ -1,11 +1,13 @@
 'use strict'; 
 
+const m = require('mithril');
 const Filter = require('./../../models/filter.js');
+const Address = require('./../../models/address.js');
 
 const groceryColor = '#a431fc';
 
 module.exports = function(){
-    this.filters =  [
+    this.filters =  m.prop([
         new Filter({
             name: 'Red Line Stations',
             radius: 800,
@@ -83,5 +85,6 @@ module.exports = function(){
             placeName: 'trader joe',
             color: groceryColor
         })
-    ];
+    ]);
+    this.address = m.prop(new Address());
 };
