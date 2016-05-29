@@ -20,11 +20,11 @@ module.exports = (controller) =>
             m.startComputation();
             GoogleMapsLoader.load((google) => {
                 let map = new google.maps.Map(element, mapOptions);
-                context.vm.init(
-                    google.maps.Circle, 
-                    new google.maps.places.PlacesService(map),
-                    map
-                ).finally(() => m.endComputation());
+                context.vm
+                    .init(
+                        new google.maps.places.PlacesService(map),
+                        (cOpts) => new google.maps.Circle(Object.assign(cOpts, {map: map})))
+                    .finally(() => m.endComputation());
             });
             context.onunload = () => GoogleMapsLoader.release();
         } 

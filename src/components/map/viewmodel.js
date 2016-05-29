@@ -29,7 +29,7 @@ const MapFilter = function(filter){
         }
     };
 
-    this.init = (Circle, places, map) => 
+    this.init = (places, newCircle) => 
         new Promise((resolve, reject) => {
             places.radarSearch({
                 location: {lat: 41.881832, lng: -87.623177},
@@ -40,12 +40,11 @@ const MapFilter = function(filter){
             (radarResults, status) => {
                 if(status === 'OK') {
                     radarResults.map((r) =>
-                        circles.push(new Circle({
+                        circles.push(newCircle({
                             center: r.geometry.location,
                             radius: filter.radius(),
                             visible: filter.enabled(),
                             fillColor: filter.color(),
-                            map: map,
                             fillOpacity: .35,
                             strokeWeight: 0
                         })));
@@ -62,6 +61,6 @@ const MapFilter = function(filter){
 module.exports = function(filters){
     let vms = filters.map((f) => new MapFilter(f));
 
-    this.init = (Marker, places, map) => Promise.map(vms, (f) => f.init(Marker, places, map));
+    this.init = (places, newCircle) => Promise.map(vms, (f) => f.init(places, newCircle), {concurrency: 5});
     this.redraw = () => vms.map((f) => f.redraw());
 };

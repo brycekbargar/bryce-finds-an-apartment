@@ -33,6 +33,7 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
+    "bluebird": "^3.4.0",
     "google-maps": "^3.2.1",
     "mithril": "^0.2.4"
   }
