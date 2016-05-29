@@ -35,6 +35,7 @@
   "dependencies": {
     "bluebird": "^3.4.0",
     "google-maps": "^3.2.1",
+    "local-storage": "^1.4.2",
     "mithril": "^0.2.4"
   }
 }
