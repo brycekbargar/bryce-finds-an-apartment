@@ -13,16 +13,17 @@ const mapOptions = {
 module.exports = (controller) => 
     (element, isInitialized, context) => {
         if(isInitialized){
-            context.vm.redraw(context.map);
+            context.vm.redraw();
         }
         else {
             context.vm = controller.vm;
             m.startComputation();
             GoogleMapsLoader.load((google) => {
-                context.map = new google.maps.Map(element, mapOptions);
+                let map = new google.maps.Map(element, mapOptions);
                 context.vm.init(
-                    google.maps.Marker, 
-                    new google.maps.places.PlacesService(context.map)
+                    google.maps.Circle, 
+                    new google.maps.places.PlacesService(map),
+                    map
                 ).finally(() => m.endComputation());
             });
             context.onunload = () => GoogleMapsLoader.release();

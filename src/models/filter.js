@@ -8,4 +8,5 @@ module.exports = function (data){
     this.radius = m.prop(data.radius);
     this.placeType = m.prop(data.placeType);
     this.placeName = m.prop(data.placeName);
+    this.color = m.prop(data.color);
 };
