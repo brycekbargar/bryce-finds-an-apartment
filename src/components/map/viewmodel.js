@@ -52,7 +52,7 @@ const MapFilter = function(filter){
                     resolve();
                 }
                 else {
-                    reject(status);
+                    reject(new Error(status));
                 }
             });
         });
