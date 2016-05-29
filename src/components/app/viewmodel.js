@@ -2,6 +2,8 @@
 
 const Filter = require('./../../models/filter.js');
 
+const groceryColor = '#a431fc';
+
 module.exports = function(){
     this.filters =  [
         new Filter({
@@ -45,6 +47,41 @@ module.exports = function(){
             placeType: 'transit_station',
             placeName: 'orange',
             color: '#f9461c'
+        }),
+        new Filter({
+            name: 'Mariano\'s',
+            radius: 800,
+            placeType: 'grocery_or_supermarket',
+            placeName: 'mariano',
+            color: groceryColor
+        }),
+        new Filter({
+            name: 'Pete\'s',
+            radius: 800,
+            placeType: 'grocery_or_supermarket',
+            placeName: 'pete',
+            color: groceryColor
+        }),
+        new Filter({
+            name: 'Jewel',
+            radius: 800,
+            placeType: 'grocery_or_supermarket',
+            placeName: 'jewel',
+            color: groceryColor
+        }),
+        new Filter({
+            name: 'Whole Foods',
+            radius: 800,
+            placeType: 'grocery_or_supermarket',
+            placeName: 'whole foods',
+            color: groceryColor
+        }),
+        new Filter({
+            name: 'Trader Joe\'s',
+            radius: 800,
+            placeType: 'grocery_or_supermarket',
+            placeName: 'trader joe',
+            color: groceryColor
         })
     ];
 };
