@@ -17,7 +17,7 @@ module.exports = function(_, args){
         m('span.Filter--radius', [
             m('input[type=range]', {
                 min: 0,
-                max: 5 * 1600,
+                max: 2 * 1600, // About 2 miles
                 step: 100,
                 onchange: m.withAttr('value', filter.radius),
                 value: filter.radius()
