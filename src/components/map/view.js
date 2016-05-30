@@ -1,5 +1,5 @@
+'use strict';
+
 const m = require('mithril');
 
-module.exports = (_, vm) => m('div.Map', {config: require('./map.js')(vm)});
-
-    
+module.exports = (ctrl) => m('div.Map', {config: ctrl.vm.loadMap});
