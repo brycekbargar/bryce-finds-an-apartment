@@ -18,7 +18,7 @@ module.exports = function(directions, google) {
         if(place && place.geometry && place.geometry.location !== previousLocation) {
             previousLocation = place.geometry.location;
 
-            let routeGetter = (args, minutes) => 
+            let routeGetter = (args, minutes) =>
                 new Promise((resolve, reject) => 
                     google.services.directions().route(Object.assign(args, {
                         destination: vm.directions.address(),
@@ -43,19 +43,24 @@ module.exports = function(directions, google) {
                         }
                     }));
 
-            let origin = {origin: place.geometry.location};
+            let origin = {
+                origin: {
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng()
+                }
+            };
             m.startComputation();
             Promise.all([
                 routeGetter(
-                    Object.assign(origin, {travelMode: google.maps.TravelMode.WALKING}), 
+                    Object.assign({}, origin, {travelMode: google.maps.TravelMode.WALKING}), 
                     vm.directions.walkingMinutes
                 ),
                 routeGetter(
-                    Object.assign(origin, {travelMode: google.maps.TravelMode.BICYCLING}), 
+                    Object.assign({}, origin, {travelMode: google.maps.TravelMode.BICYCLING}), 
                     vm.directions.bikingMinutes
                 ),
                 routeGetter(
-                    Object.assign(origin, {travelMode: google.maps.TravelMode.TRANSIT}), 
+                    Object.assign({}, origin, {travelMode: google.maps.TravelMode.TRANSIT}), 
                     vm.directions.transitMinutes
                 )
             ])
