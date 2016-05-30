@@ -20,7 +20,6 @@ module.exports = function(g) {
                 g.maps = google.maps;
                 g.services.places(new google.maps.places.PlacesService(map));
                 g.services.geocoder(new google.maps.Geocoder());
-                g.services.autocomplete(new google.maps.places.AutocompleteService());
                 m.endComputation();
             });
             context.onunload = () => GoogleMapsLoader.release();
