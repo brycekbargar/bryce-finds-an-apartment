@@ -19,8 +19,8 @@ module.exports = function(){
         maps: null,
         services: {
             places: m.prop(),
-            geocoder: m.prop(),
-            autocomplete: m.prop()
+            autocomplete: m.prop(),
+            directions: m.prop()
         }
     };
 };

@@ -19,7 +19,7 @@ module.exports = function(g) {
                 g.map(map);
                 g.maps = google.maps;
                 g.services.places(new google.maps.places.PlacesService(map));
-                g.services.geocoder(new google.maps.Geocoder());
+                g.services.directions(new google.maps.DirectionsService());
                 m.endComputation();
             });
             context.onunload = () => GoogleMapsLoader.release();
