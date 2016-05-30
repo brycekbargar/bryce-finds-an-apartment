@@ -8,7 +8,9 @@ module.exports = function(directions, google) {
 
     vm.directions = directions;
     
-    vm.walkingVisible = () => vm.directions.walkingMinutes() < 30;
+    vm.walkingVisible = () => vm.directions.walkingMinutes() < 20;
+    vm.bikingVisible = () => vm.directions.bikingMinutes() < 45;
+    vm.transitVisible = () => vm.directions.transitMinutes() > 0;
 
     let previousLocation;
     vm.getDirections = () => {
@@ -32,7 +34,7 @@ module.exports = function(directions, google) {
                                     route.legs
                                         .filter((l) => l.duration)
                                         .reduce((seconds, l) => seconds + l.duration.value, 0);
-                                minutes(totalSeconds / 60);
+                                minutes(Math.round(totalSeconds / 60));
                             } else {
                                 minutes(0);
                             }

@@ -4,23 +4,33 @@ const m = require('mithril');
 
 module.exports = (ctrl) => {
     let vm = ctrl.vm;
-    return m('div.Directions.u-flexbox.u-flexbox--vertical', {
+    return m('table.Directions', {
         config: vm.getDirections
     }, [
-        m('label', vm.directions.name()),
-        m('span.Directions--walking', {
-            style: {display: vm.walkingVisible() ? 'inline' : 'none'}
-        }, [
-            m('label', 'Walking:'),
-            m('label', vm.directions.walkingMinutes())
+        m('thead', [
+            m('tr', [
+                m('th[colspan=2]', vm.directions.name())
+            ])
         ]),
-        m('span.Directions--biking', [
-            m('label', 'Biking:'),
-            m('label', vm.directions.bikingMinutes())
-        ]),
-        m('span.Directions--transit', [
-            m('label', 'Transit:'),
-            m('label', vm.directions.transitMinutes())
+        m('tbody', [
+            m('tr', {
+                style: {display: vm.walkingVisible() ? 'inline' : 'none'}
+            }, [
+                m('td.Directions--walking', 'Walking:'),
+                m('td', `${vm.directions.walkingMinutes()} minutes}`)
+            ]),
+            m('tr', {
+                style: {display: vm.bikingVisible() ? 'inline' : 'none'}
+            }, [
+                m('td.Directions--biking', 'Biking:'),
+                m('td', `${vm.directions.bikingMinutes()} minutes`)
+            ]),
+            m('tr', {
+                style: {display: vm.transitVisible() ? 'inline' : 'none'}
+            }, [
+                m('td.Directions--biking', 'Transit:'),
+                m('td', `${vm.directions.transitMinutes()} minutes`)
+            ])
         ])
     ]);
 };
