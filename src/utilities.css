@@ -2,3 +2,5 @@
 .u-flexbox { display: flex; }
 .u-flexbox--vertical { flex-direction: column; }
 
+.u-box { width: 200px; } 
+
