@@ -14,14 +14,14 @@ module.exports = function(directions, google) {
     vm.getDirections = () => {
         if(!google.maps || !google.services.autocomplete() || ! google.services.directions()) { return; }
 
-        let place  = google.services.autocomplete().getPlace();
-        if(place.geometry && place.geometry.location !== previousLocation) {
+        let place = google.services.autocomplete().getPlace();
+        if(place && place.geometry && place.geometry.location !== previousLocation) {
             previousLocation = place.geometry.location;
 
             let routeGetter = (args, minutes) => 
                 new Promise((resolve, reject) => 
-                    google.maps.directions().route(Object.assign(args, {
-                        origin: vm.directions.address(),
+                    google.services.directions().route(Object.assign(args, {
+                        destination: vm.directions.address(),
                         provideRouteAlternatives: false
                     }),
                     (routeResults, status) => {
@@ -43,19 +43,19 @@ module.exports = function(directions, google) {
                         }
                     }));
 
-            let destination = {destination: place.geometry.location};
+            let origin = {origin: place.geometry.location};
             m.startComputation();
-            Promise.map([
+            Promise.all([
                 routeGetter(
-                    Object.assign(destination, {travelMode: google.maps.TravelMode.WALKING}), 
+                    Object.assign(origin, {travelMode: google.maps.TravelMode.WALKING}), 
                     vm.directions.walkingMinutes
                 ),
                 routeGetter(
-                    Object.assign(destination, {travelMode: google.maps.TravelMode.BICYCLING}), 
+                    Object.assign(origin, {travelMode: google.maps.TravelMode.BICYCLING}), 
                     vm.directions.bikingMinutes
                 ),
                 routeGetter(
-                    Object.assign(destination, {travelMode: google.maps.TravelMode.TRANSIT}), 
+                    Object.assign(origin, {travelMode: google.maps.TravelMode.TRANSIT}), 
                     vm.directions.transitMinutes
                 )
             ])

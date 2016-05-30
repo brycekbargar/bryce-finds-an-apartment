@@ -1,5 +1,7 @@
 'use strict';
 
+const m = require('mithril');
+
 module.exports = function(google){
 
     this.autocomplete = (element) => {
@@ -18,6 +20,7 @@ module.exports = function(google){
             var place = autocomplete.getPlace();
             if(place.geometry) {
                 marker.setPosition(place.geometry.location);
+                m.redraw();
             }
         });
     };
