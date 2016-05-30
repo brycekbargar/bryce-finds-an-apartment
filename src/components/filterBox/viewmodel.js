@@ -72,17 +72,10 @@ module.exports = function(google) {
             color: groceryColor
         }),
         new Filter({
-            name: 'Whole Foods',
+            name: 'Dominick\'s',
             radius: 800,
             placeType: 'grocery_or_supermarket',
-            placeName: 'whole foods',
-            color: groceryColor
-        }),
-        new Filter({
-            name: 'Trader Joe\'s',
-            radius: 800,
-            placeType: 'grocery_or_supermarket',
-            placeName: 'trader joe',
+            placeName: 'dominick',
             color: groceryColor
         })
     ]);
