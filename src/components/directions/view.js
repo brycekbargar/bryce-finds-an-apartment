@@ -4,21 +4,13 @@ const m = require('mithril');
 
 module.exports = (ctrl) => {
     let vm = ctrl.vm;
-    return m('table.Directions', {
-        config: vm.getDirections
-    }, [
+    return m('table.Directions', [
         m('thead', [
             m('tr', [
                 m('th[colspan=2]', vm.directions.name())
             ])
         ]),
         m('tbody', [
-            m('tr', {
-                style: {display: vm.walkingVisible() ? 'inline' : 'none'}
-            }, [
-                m('td.Directions--walking', 'Walking:'),
-                m('td', `${vm.directions.walkingMinutes()} minutes}`)
-            ]),
             m('tr', {
                 style: {display: vm.bikingVisible() ? 'inline' : 'none'}
             }, [
