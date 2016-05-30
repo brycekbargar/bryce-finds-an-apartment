@@ -52,31 +52,38 @@ module.exports = function(google) {
         }),
         new Filter({
             name: 'Mariano\'s',
-            radius: 800,
+            radius: 1600,
             placeType: 'grocery_or_supermarket',
             placeName: 'mariano',
             color: groceryColor
         }),
         new Filter({
             name: 'Pete\'s',
-            radius: 800,
+            radius: 1600,
             placeType: 'grocery_or_supermarket',
             placeName: 'pete',
             color: groceryColor
         }),
         new Filter({
             name: 'Jewel',
-            radius: 800,
+            radius: 1600,
             placeType: 'grocery_or_supermarket',
             placeName: 'jewel',
             color: groceryColor
         }),
         new Filter({
             name: 'Dominick\'s',
-            radius: 800,
+            radius: 1600,
             placeType: 'grocery_or_supermarket',
             placeName: 'dominick',
             color: groceryColor
+        }),
+        new Filter({
+            name: 'Walgreen\'s',
+            radius: 1600,
+            placeType: 'pharmacy',
+            placeName: 'walgreen',
+            color: '#000000'
         })
     ]);
 };
