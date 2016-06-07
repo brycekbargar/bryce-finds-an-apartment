@@ -1,10 +1,11 @@
+const match = require('sinon').match;
 const spy = require('sinon').spy;
 const stub = require('sinon').stub;
 const expect = require('chai')
     .use(require('sinon-chai'))
     .expect;
 const proxyquire = require('proxyquire').noCallThru();
-
+const jsdomify = require('jsdomify').default;
 
 describe('For the Map component', () => {
     beforeEach('reset mithril', () => {
@@ -111,5 +112,34 @@ describe('For the Map component', () => {
         });
     });
 
+    describe('expect the View', () => {
+        before('create the dom', () => jsdomify.create('<html><body></body></html>'));
+        after('destroy the dom', () => jsdomify.destroy());
 
-});
+        beforeEach('render View', () => {
+            jsdomify.clear();
+            this.document = jsdomify.getDocument();
+            this.m.deps(this.document.defaultView);
+            let view = proxyquire('./../src/components/map/view.js', {
+                'mithril': this.m
+            });
+            let test = this;
+            test.loadMapSpy = spy();
+            this.m.mount(this.document.body, {
+                controller: function() {
+                    this.vm = {
+                        loadMap: test.loadMapSpy
+                    }
+                },
+                view: view             
+            });
+        });
+        it('to load the map', () => {
+            expect(this.loadMapSpy).to.have.been.calledWith(match.any, false, {});
+        });
+        it('to render it in a named div', () => {
+            let element = this.document.getElementsByTagName('div')[0];
+            expect(element.className).to.equal('Map');
+        });
+    });
+})
