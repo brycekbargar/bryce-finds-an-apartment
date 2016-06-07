@@ -1,18 +1,18 @@
 #!/bin/zsh
 
 mkdir -p ./tmp
-./node_modules/.bin/browserify src/index.js -o tmp/app.js
 /bin/cp src/index.html tmp/
 /bin/cp src/**/*.css tmp/
+./node_modules/.bin/browserify src/index.js -o tmp/app.js
 
-local gmlk=$GOOGLE_MAPS_APA_DEV
-if [[ $1 == "-p" ]]; then
-    echo "prod"
-    gmlk=$GOOGLE_MAPS_APA_PROD
-fi
 
 mkdir -p ./dist
 /bin/cp ./tmp/index.html ./dist/
-sed -e "s/GOOGLE_MAPS_LOADER_KEY/$gmlk/" ./tmp/app.js > ./dist/app.js
 cat ./tmp/*.css > ./dist/app.css
+local gmlk=$GOOGLE_MAPS_APA_DEV
+if [[ $1 == "-p" ]]; then
+    gmlk=$GOOGLE_MAPS_APA_PROD
+    echo 'apa.brycekbargar.com' > ./dist/CNAME
+fi
+sed -e "s/GOOGLE_MAPS_LOADER_KEY/$gmlk/" ./tmp/app.js > ./dist/app.js
 

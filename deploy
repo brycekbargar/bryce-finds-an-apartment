@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+git add dist/*
+git commit --allow-empty -m 'Site Push'
+git subtree split --prefix dist -b gh-pages
+git push --force origin gh-pages:gh-pages 
+git branch -D gh-pages
+git reset HEAD~1

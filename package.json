@@ -16,7 +16,9 @@
     "build:prod": "npm run test:prod && ./build -p",
 
     "rebuild": "npm run clean && npm run build",
-    "rebuild:prod": "npm run clean && npm run build:prod"
+    "rebuild:prod": "npm run clean && npm run build:prod",
+
+    "deploy": "npm run rebuild:prod && ./deploy"
   },
   "repository": {
     "type": "git",
