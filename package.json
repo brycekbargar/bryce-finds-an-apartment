@@ -4,12 +4,19 @@
   "description": "a small google maps app to help me figure out where to live",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -fdr ./tmp ./dist",
+
+    "lint": "eslint ./ --rule 'no-console: 0' || true",
     "lint:prod": "eslint ./",
-    "lint:dev": "eslint ./ --rule 'no-console: 0'|| true",
-    "test": "istanbul cover _mocha; npm run lint:dev",
-    "clean": "rm -fdr ./build ./dist",
-    "build": "npm run lint:prod && mkdir -p build && ./package",
-    "rebuild": "npm run clean && npm run build"
+
+    "test": "istanbul cover _mocha; npm run lint",
+    "test:prod": "istanbul cover _mocha && npm run lint:prod",
+
+    "build": "npm run lint && ./build",
+    "build:prod": "npm run test:prod && ./build -p",
+
+    "rebuild": "npm run clean && npm run build",
+    "rebuild:prod": "npm run clean && npm run build:prod"
   },
   "repository": {
     "type": "git",
