@@ -7,10 +7,13 @@ const expect = require('chai')
 const proxyquire = require('proxyquire').noCallThru();
 const jsdomify = require('jsdomify').default;
 
+let m, AppViewmodel;
+
 describe('For the Map component', () => {
     beforeEach('reset mithril', () => {
         delete require.cache[require.resolve('mithril')];
-        this.m = require('mithril');
+        m = require('mithril');
+        AppViewmodel = require('./../src/components/app/viewmodel.js');
     });
 
     describe('expect the Controller to', () => {
@@ -24,24 +27,15 @@ describe('For the Map component', () => {
         });
 
         it('give the viewmodel access to google on the app viewmodel', () => {
-            let google = {};
-            new this.Controller({google: google});
+            let vm = new AppViewmodel();
+            new this.Controller(vm);
             expect(this.vmSpy).to.have.been.calledWithNew;
-            expect(this.vmSpy).to.have.calledWithExactly(google);
+            expect(this.vmSpy).to.have.calledWithExactly(vm.google);
         });
     });
 
     describe('expect the Viewmodel', () => {
         beforeEach('setup spies', () => {
-            this.appGoogle = {
-                center: spy(),
-                zoom: spy(),
-                map: spy(),
-                services: {
-                    places: spy(),
-                    directions: spy()
-                }
-            };
             this.mithril = {
                 startComputation: spy(),
                 endComputation: spy()
@@ -66,6 +60,7 @@ describe('For the Map component', () => {
                 'mithril': this.mithril,
                 'google-maps': this.google_maps
             });
+            this.appGoogle = new AppViewmodel().google;
             this.viewmodel = new Viewmodel(this.appGoogle);
         });
 
@@ -98,15 +93,16 @@ describe('For the Map component', () => {
                 });
                 it('render the map', () => {
                     expect(this.google.maps.Map).to.have.been.calledWithNew;
-                    expect(this.google.maps.Map).to.have.been.calledWith(this.element);
-                    expect(this.appGoogle.center).to.have.been.called;
-                    expect(this.appGoogle.zoom).to.have.been.called;
+                    expect(this.google.maps.Map).to.have.been.calledWith(this.element, {
+                        center: this.appGoogle.center(),
+                        zoom: this.appGoogle.zoom()
+                    });
                 });
                 it('update the app viewmodel', () => {
-                    expect(this.appGoogle.map).to.have.been.called;
+                    expect(this.appGoogle.map()).to.exist;
                     expect(this.appGoogle.maps).to.equal(this.google.maps);;
-                    expect(this.appGoogle.services.places).to.have.been.called;
-                    expect(this.appGoogle.services.directions).to.have.been.called;
+                    expect(this.appGoogle.services.places()).to.exist;
+                    expect(this.appGoogle.services.directions()).to.exist;
                 });
             });
         });
@@ -116,22 +112,21 @@ describe('For the Map component', () => {
         before('create the dom', () => jsdomify.create('<html><body></body></html>'));
         after('destroy the dom', () => jsdomify.destroy());
 
-        beforeEach('render View', () => {
+        beforeEach('setup jsdom', () => {
             jsdomify.clear();
             this.document = jsdomify.getDocument();
-            this.m.deps(this.document.defaultView);
-            let view = proxyquire('./../src/components/map/view.js', {
-                'mithril': this.m
-            });
+            m.deps(this.document.defaultView);
+        });
+        beforeEach('render View', () => {
             let test = this;
             test.loadMapSpy = spy();
-            this.m.mount(this.document.body, {
+            m.mount(this.document.body, {
                 controller: function() {
                     this.vm = {
                         loadMap: test.loadMapSpy
                     }
                 },
-                view: view             
+                view: require('./../src/components/map/view.js')             
             });
         });
         it('to load the map', () => {
