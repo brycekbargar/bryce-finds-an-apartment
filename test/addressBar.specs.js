@@ -5,12 +5,11 @@ const expect = require('chai')
     .expect;
 const proxyquire = require('proxyquire').noCallThru();
 
-let m, AppViewmodel;
+let AppViewmodel;
 
 describe('For the AddressBar component', () => {
     beforeEach('reset mithril', () => {
         delete require.cache[require.resolve('mithril')];
-        m = require('mithril');
         AppViewmodel = require('./../src/components/app/viewmodel.js');
     });
 
@@ -41,7 +40,7 @@ describe('For the AddressBar component', () => {
                 places: {
                     Autocomplete: stub()
                 }
-            }
+            };
             this.appGoogle.maps.Marker.returns(this.marker);
             this.appGoogle.maps.places.Autocomplete.returns(this.autocomplete = {
                 addListener: spy()

@@ -44,10 +44,10 @@ describe('For the Map component', () => {
                 maps: {
                     Map: spy(),
                     places: {
-                        PlacesService: spy(),
+                        PlacesService: spy()
                     },
                     DirectionsService: spy()
-                },
+                }
             };
             this.google_maps = {
                 load: stub(),
@@ -101,7 +101,7 @@ describe('For the Map component', () => {
                 });
                 it('update the app viewmodel', () => {
                     expect(this.appGoogle.map()).to.exist;
-                    expect(this.appGoogle.maps).to.equal(this.google.maps);;
+                    expect(this.appGoogle.maps).to.equal(this.google.maps);
                     expect(this.appGoogle.services.places()).to.exist;
                     expect(this.appGoogle.services.directions()).to.exist;
                 });
@@ -125,7 +125,7 @@ describe('For the Map component', () => {
                 controller: function() {
                     this.vm = {
                         loadMap: test.loadMapSpy
-                    }
+                    };
                 },
                 view: require('./../src/components/map/view.js')             
             });
@@ -138,4 +138,4 @@ describe('For the Map component', () => {
             expect(element.className).to.equal('Map');
         });
     });
-})
+});
