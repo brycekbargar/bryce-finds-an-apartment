@@ -64,13 +64,14 @@ describe('For the Map component', () => {
             this.viewmodel = new Viewmodel(this.appGoogle);
         });
 
+        it('to setup the loader', () => {
+            expect(this.google_maps.LIBRARIES).to.contain('drawing');
+            expect(this.google_maps.LIBRARIES).to.contain('places');
+            expect(this.google_maps.KEY).to.equal('GOOGLE_MAPS_LOADER_KEY');
+        });
+
         describe('when .loadMap() is called', () => {
-            it('to setup the loader', () => {
-                expect(this.google_maps.LIBRARIES).to.contain('drawing');
-                expect(this.google_maps.LIBRARIES).to.contain('places');
-                expect(this.google_maps.KEY).to.equal('GOOGLE_MAPS_LOADER_KEY');
-            });
-            it('to do nothing when already initialized', () => {
+            it('todo nothing when already initialized', () => {
                 this.viewmodel.loadMap(null, true, null);
                 expect(this.mithril.startComputation).to.not.have.been.called;
                 expect(this.google_maps.load).to.not.have.been.called;
@@ -108,7 +109,7 @@ describe('For the Map component', () => {
         });
     });
 
-    describe('expect the View', () => {
+    describe('expect the View to', () => {
         before('create the dom', () => jsdomify.create('<html><body></body></html>'));
         after('destroy the dom', () => jsdomify.destroy());
 
@@ -129,10 +130,10 @@ describe('For the Map component', () => {
                 view: require('./../src/components/map/view.js')             
             });
         });
-        it('to load the map', () => {
+        it('load the map', () => {
             expect(this.loadMapSpy).to.have.been.calledWith(match.any, false, {});
         });
-        it('to render it in a named div', () => {
+        it('render it in a named div', () => {
             let element = this.document.getElementsByTagName('div')[0];
             expect(element.className).to.equal('Map');
         });

@@ -8,7 +8,7 @@ module.exports = function(google){
         if(google.services.autocomplete() || !google.maps) { return; }
         let marker = new google.maps.Marker({
             icon: {
-                url: 'http://maps.gstatic.com/mapfiles/circle.png'
+                url: 'https://maps.gstatic.com/mapfiles/circle.png'
             },
             map: google.map()
         });
