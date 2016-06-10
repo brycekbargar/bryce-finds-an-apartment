@@ -1,18 +1,20 @@
 #!/bin/zsh
 
-mkdir -p ./tmp
-/bin/cp src/index.html tmp/
-/bin/cp src/**/*.css tmp/
-./node_modules/.bin/browserify src/index.js -o tmp/app.js
-
-
 mkdir -p ./dist
-/bin/cp ./tmp/index.html ./dist/
-cat ./tmp/*.css > ./dist/app.css
+
+# Copy the index page
+/bin/cp ./src/index.html ./dist/
+
+# Cat all the css to one file
+cat ./src/**/*.css > ./dist/app.css
+
+# Per "environment" settings
 local gmlk=$GOOGLE_MAPS_APA_DEV
 if [[ $1 == "-p" ]]; then
     gmlk=$GOOGLE_MAPS_APA_PROD
     echo 'apa.brycekbargar.com' > ./dist/CNAME
 fi
-sed -e "s/GOOGLE_MAPS_LOADER_KEY/$gmlk/" ./tmp/app.js > ./dist/app.js
+
+# Resolve the JS modules and add the Maps key
+./node_modules/.bin/browserify src/index.js | sed -e "s/GOOGLE_MAPS_LOADER_KEY/$gmlk/" > ./dist/app.js
 
