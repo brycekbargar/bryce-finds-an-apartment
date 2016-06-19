@@ -5,19 +5,14 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -fdr ./dist",
-
     "lint": "eslint ./ --rule 'no-console: 0' || true",
     "lint:prod": "eslint ./",
-
     "test": "istanbul cover _mocha; npm run lint",
     "test:prod": "istanbul cover _mocha && npm run lint:prod",
-
     "build": "npm run lint && ./build",
     "build:prod": "npm run test:prod && ./build -p",
-
     "rebuild": "npm run clean && npm run build",
     "rebuild:prod": "npm run clean && npm run build:prod",
-
     "deploy": "npm run rebuild:prod && ./deploy"
   },
   "repository": {
@@ -45,6 +40,7 @@
     "bluebird": "^3.4.0",
     "google-maps": "^3.2.1",
     "local-storage": "^1.4.2",
-    "mithril": "^0.2.4"
+    "mithril": "^0.2.4",
+    "randomcolor": "^0.4.4"
   }
 }

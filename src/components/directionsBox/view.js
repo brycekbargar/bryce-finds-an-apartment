@@ -10,8 +10,8 @@ module.exports = (ctrl) =>
         ctrl.vm.directions().map((d) => m(DirectionsComponent, {directions: d})),
         m('span.u-flexbox.u-flexbox--vertical', [
             m('span.DirectionsBox--name', [
-                m('label[for=Name]', 'Name:' ),
-                m('input#Name[type=text]', {
+                m('label[for=DirectionsName]', 'Name:'),
+                m('input#DirectionsName[type=text]', {
                     onchange: m.withAttr('value', ctrl.vm.name),
                     value: ctrl.vm.name()
                 })
