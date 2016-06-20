@@ -2,6 +2,8 @@
 
 const m = require('mithril');
 const FilterComponent = require('./../filter/component.js');
+const placeTypes = require('google-place-types');
+const humanize = require('humanize-string');
 
 module.exports = (ctrl) => 
     m('div.FilterBox.u-flexbox.u-flexbox--vertical.u-box', [
@@ -23,8 +25,7 @@ module.exports = (ctrl) =>
                 onchange: m.withAttr('value', ctrl.vm.type),
                 value: ctrl.vm.type()
             }, [
-                m('option[value=bar]', 'Drink'),
-                m('option[value=restaurant]', 'Food')
+                placeTypes.map(p => m(`option[value=${p}]`, humanize(p)))
             ])
         ]),
         m('span.FilterBox--keyword', [
