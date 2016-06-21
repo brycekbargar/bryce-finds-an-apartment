@@ -22,8 +22,8 @@ module.exports = (ctrl) =>
         m('span.FilterBox--type', [
             m('label[for=Type]', 'Type:'),
             m('select#Type', {
-                onchange: m.withAttr('value', ctrl.vm.type),
-                value: ctrl.vm.type()
+                onchange: m.withAttr('value', ctrl.vm.placeType),
+                value: ctrl.vm.placeType()
             }, [
                 placeTypes.map(p => m(`option[value=${p}]`, humanize(p)))
             ])
@@ -36,7 +36,7 @@ module.exports = (ctrl) =>
             })
         ]),
         m('button[type=button]', {
-            onclick: ctrl.vm.add
+            onclick: ctrl.add
         }, 'Add')
     ]);
 

@@ -43,6 +43,7 @@
     "humanize-string": "^1.0.1",
     "local-storage": "^1.4.2",
     "mithril": "^0.2.4",
+    "mithril-validator": "^1.1.0",
     "randomcolor": "^0.4.4"
   }
 }

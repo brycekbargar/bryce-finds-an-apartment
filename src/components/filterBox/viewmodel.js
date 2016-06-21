@@ -10,14 +10,14 @@ module.exports = function(google) {
     vm.filters =  m.prop([]);
 
     vm.name = m.prop('');
-    vm.type = m.prop('');
+    vm.placeType = m.prop('');
     vm.keyword = m.prop('');
 
     vm.add = () => {
         vm.filters().push(new Filter({
             name: vm.name(),
             radius: 800,
-            placeType: vm.type(),
+            placeType: vm.placeType(),
             placeName: vm.keyword(),
             color: randomColor()
         }));

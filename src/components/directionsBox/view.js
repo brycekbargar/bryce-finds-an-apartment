@@ -24,7 +24,7 @@ module.exports = (ctrl) =>
                 })
             ]),
             m('button[type=button]', {
-                onclick: ctrl.vm.add
+                onclick: ctrl.add
             }, 'Add')
         ])
     ]);
