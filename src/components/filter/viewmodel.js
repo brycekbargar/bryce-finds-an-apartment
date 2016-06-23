@@ -1,7 +1,6 @@
 'use strict';
 
 const m = require('mithril');
-const ls = require('local-storage');
 const randomColor = require('randomcolor');
 
 module.exports = function(filter, google, index) {
@@ -29,27 +28,20 @@ module.exports = function(filter, google, index) {
     vm.overlay = () => {
         if(circles || !google.maps) { return; }
         circles = [];
-        new Promise((resolve, reject) => {
-            if(ls(filter.name())) {
-                resolve(ls(vm.name()));
-            }
-            else {
-                google.services.places().radarSearch({
-                    bounds: google.bounds(),
-                    type: filter.placeType(),
-                    name: filter.placeName()
-                },
-                (radarResults, status) => {
-                    if(status == google.maps.places.PlacesServiceStatus.OK) {
-                        ls(filter.name(), radarResults);
-                        resolve(radarResults);
-                    }
-                    else {
-                        reject(new Error(status));
-                    }
-                });
-            }
-        })
+        new Promise((resolve, reject) => 
+            google.services.places().radarSearch({
+                bounds: google.bounds(),
+                type: filter.placeType(),
+                name: filter.placeName()
+            },
+            (radarResults, status) => {
+                if(status == google.maps.places.PlacesServiceStatus.OK) {
+                    resolve(radarResults);
+                }
+                else {
+                    reject(new Error(status));
+                }
+            }))
         .then((radarResults) => 
             radarResults.map((r) => 
                 circles.push(new google.maps.Circle({
