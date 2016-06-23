@@ -15,6 +15,7 @@ module.exports = (ctrl) =>
         m('span.FilterBox--name', [
             m('label[for=FilterName]', 'Name:'),
             m('input#FilterName[type=text]', {
+                class: ctrl.validator.hasError('name') ? 'u-background--red' : '',
                 onchange: m.withAttr('value', ctrl.vm.name),
                 value: ctrl.vm.name()
             })
@@ -22,6 +23,7 @@ module.exports = (ctrl) =>
         m('span.FilterBox--type', [
             m('label[for=Type]', 'Type:'),
             m('select#Type', {
+                class: ctrl.validator.hasError('placeType') ? 'u-background--red' : '',
                 onchange: m.withAttr('value', ctrl.vm.placeType),
                 value: ctrl.vm.placeType()
             }, [

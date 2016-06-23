@@ -12,6 +12,7 @@ module.exports = (ctrl) =>
             m('span.DirectionsBox--name', [
                 m('label[for=DirectionsName]', 'Name:'),
                 m('input#DirectionsName[type=text]', {
+                    class: ctrl.validator.hasError('name') ? 'u-background--red' : '',
                     onchange: m.withAttr('value', ctrl.vm.name),
                     value: ctrl.vm.name()
                 })
@@ -19,6 +20,7 @@ module.exports = (ctrl) =>
             m('span.DirectionsBox--address', [
                 m('label[for=Address]', 'Address:' ),
                 m('input#Address[type=text]', {
+                    class: ctrl.validator.hasError('address') ? 'u-background--red' : '',
                     onchange: m.withAttr('value', ctrl.vm.address),
                     value: ctrl.vm.address()
                 })
