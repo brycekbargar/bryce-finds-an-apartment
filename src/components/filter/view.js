@@ -13,7 +13,9 @@ module.exports = function(ctrl){
                 onclick: m.withAttr('checked', vm.onenabledchange), 
                 checked: vm.enabled()
             }), 
-            m(`label[for=${vm.id()}]`, vm.name())
+            m(`label[for=${vm.id()}]`, {
+                style: { 'background-color': vm.color() }
+            }, vm.name())
         ]),
         m('span.Filter--radius', [
             m('input[type=range]', {

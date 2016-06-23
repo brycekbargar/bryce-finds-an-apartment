@@ -1,12 +1,15 @@
 'use strict';
 
+const m = require('mithril');
 const ls = require('local-storage');
+const randomColor = require('randomcolor');
 
 module.exports = function(filter, google, index) {
     let vm = this;
     vm.name = filter.name;
-    vm.enabled = filter.enabled;
-    vm.radius = filter.radius;
+    vm.enabled = m.prop(false);
+    vm.radius = m.prop(800);
+    vm.color = m.prop(randomColor());
     vm.id = () => `filter${index}`;
 
     let circles;
@@ -52,9 +55,9 @@ module.exports = function(filter, google, index) {
                 circles.push(new google.maps.Circle({
                     map: google.map(),
                     center: r.geometry.location,
-                    radius: filter.radius(),
-                    visible: filter.enabled(),
-                    fillColor: filter.color(),
+                    radius: vm.radius(),
+                    visible: vm.enabled(),
+                    fillColor: vm.color(),
                     fillOpacity: .45,
                     strokeWeight: 0
                 }))));

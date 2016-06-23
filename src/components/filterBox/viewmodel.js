@@ -1,6 +1,5 @@
 'use strict';
 
-const randomColor = require('randomcolor');
 const m = require('mithril');
 const Filter = require('./../../models/filter.js');
 
@@ -16,10 +15,8 @@ module.exports = function(google) {
     vm.add = () => {
         vm.filters().push(new Filter({
             name: vm.name(),
-            radius: 800,
             placeType: vm.placeType(),
-            placeName: vm.keyword(),
-            color: randomColor()
+            placeName: vm.keyword()
         }));
         vm.name('');
         vm.keyword('');
