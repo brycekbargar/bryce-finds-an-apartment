@@ -35,7 +35,8 @@ module.exports = function(filter, google, index) {
                 name: filter.placeName()
             },
             (radarResults, status) => {
-                if(status == google.maps.places.PlacesServiceStatus.OK) {
+                if(status === google.maps.places.PlacesServiceStatus.OK ||
+                    status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
                     resolve(radarResults);
                 }
                 else {

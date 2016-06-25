@@ -38,7 +38,8 @@ module.exports = function(google) {
                         provideRouteAlternatives: false
                     }),
                     (routeResults, status) => {
-                        if(status === google.maps.DirectionsStatus.OK) {
+                        if(status === google.maps.DirectionsStatus.OK || 
+                            status === google.maps.DirectionsStatus.NOT_FOUND) {
                             let route = routeResults.routes[0];
                             if(route && route.legs) {
                                 let totalSeconds =
@@ -47,7 +48,7 @@ module.exports = function(google) {
                                         .reduce((seconds, l) => seconds + l.duration.value, 0);
                                 minutes(Math.round(totalSeconds / 60));
                             } else {
-                                minutes(0);
+                                minutes(undefined);
                             }
                             resolve();
                         }
