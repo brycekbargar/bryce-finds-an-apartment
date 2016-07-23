@@ -12,6 +12,8 @@ module.exports = function(google) {
     vm.name = m.prop('');
     vm.address = m.prop('');
     vm.add = () => {
+        if(mixpanel) { mixpanel.track('directionsBox_add'); }
+
         vm.directions().push(new Directions({
             name: vm.name(),
             address: vm.address()

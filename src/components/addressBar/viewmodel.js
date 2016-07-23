@@ -17,6 +17,8 @@ module.exports = function(google){
         });
         google.services.autocomplete(autocomplete);
         autocomplete.addListener('place_changed', () => {
+            if(mixpanel) { mixpanel.track('place_changed'); }
+
             var place = autocomplete.getPlace();
             if(place.geometry) {
                 marker.setPosition(place.geometry.location);

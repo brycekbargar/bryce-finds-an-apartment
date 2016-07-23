@@ -13,6 +13,8 @@ module.exports = function(google) {
     vm.keyword = m.prop('');
 
     vm.add = () => {
+        if(mixpanel) { mixpanel.track('filterBox_add'); }
+
         vm.filters().push(new Filter({
             name: vm.name(),
             placeType: vm.placeType(),

@@ -1,3 +1,5 @@
+globals: 
+  mixpanel: false
 env:
   browser: true
   commonjs: true
